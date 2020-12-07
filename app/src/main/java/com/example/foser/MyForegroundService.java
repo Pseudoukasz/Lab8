@@ -31,11 +31,13 @@ public class MyForegroundService extends Service
     public static final String TIME = "time";
     public static final String WORK = "work";
     public static final String WORK_DOUBLE = "work_double";
+    public static final String WORK_QUINTUPLE = "work_quintuple";
+    public static final String WORK_DECUPLE = "work_decuple";
 
     //3. Wartości ustawień
     private String message;
-    private Boolean show_time, do_work, double_speed;
-    private final long period = 2000; //2s
+    private Boolean show_time, do_work, every_two_sec, every_five_sec, every_ten_sec;
+    private final long period = 10000; //10s
 
     private Context ctx;
     private Intent notificationIntent;
@@ -67,12 +69,25 @@ public class MyForegroundService extends Service
 
     private void doWork() {
         if(do_work) {
-            timer.schedule(timerTask, 0L, double_speed ? period / 2L : period);
+            if (every_two_sec){
+                timer.schedule(timerTask, 0L,period / 5L);
+            }
+            else if (every_five_sec){
+                timer.schedule(timerTask, 0L,period / 2L);
+            }
+            else if (every_ten_sec){
+                timer.schedule(timerTask, 0L, period);
+            }else {
+                timer.schedule(timerTask, 0L, period / 10L);
+            }
+            //timer.schedule(timerTask, 0L, every_two_sec ? period / 2L : period);
         }
         String info = "Start working..."
                 +"\n show_time=" + show_time.toString()
                 +"\n do_work=" + do_work.toString()
-                +"\n double_speed=" + double_speed.toString();
+                +"\n every_two_sec=" + every_two_sec.toString()
+                +"\n every_five_sec=" + every_five_sec.toString()
+                +"\n every_ten_sec=" + every_ten_sec.toString();
 
         Toast.makeText(this, info ,Toast.LENGTH_LONG).show();
     }
@@ -126,8 +141,9 @@ public class MyForegroundService extends Service
         message = intent.getStringExtra(MESSAGE);
         show_time = intent.getBooleanExtra(TIME,false);
         do_work = intent.getBooleanExtra(WORK,false);
-        double_speed = intent.getBooleanExtra(WORK_DOUBLE,false);
-
+        every_two_sec = intent.getBooleanExtra(WORK_DOUBLE,false);
+        every_five_sec = intent.getBooleanExtra(WORK_QUINTUPLE,false);
+        every_ten_sec = intent.getBooleanExtra(WORK_DECUPLE,false);
         createNotificationChannel();
 
         /*Intent notificationIntent = new Intent(this,MainActivity.class);

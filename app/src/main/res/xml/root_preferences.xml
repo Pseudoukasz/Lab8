@@ -41,6 +41,19 @@
             app:summaryOn="@string/attachment_summary_on"
             app:title="@string/attachment_title" />
 
+        <SwitchPreferenceCompat
+            app:dependency="sync"
+            app:key="quintuple"
+            app:summaryOff="@string/attachment2_summary_off"
+            app:summaryOn="@string/attachment2_summary_on"
+            app:title="@string/attachment2_title" />
+
+        <SwitchPreferenceCompat
+            app:dependency="sync"
+            app:key="decuple"
+            app:summaryOff="@string/attachment3_summary_off"
+            app:summaryOn="@string/attachment3_summary_on"
+            app:title="@string/attachment3_title" />
     </PreferenceCategory>
 
 </PreferenceScreen>

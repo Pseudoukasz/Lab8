@@ -35,7 +35,15 @@
 
     <!-- Sync Preferences -->
     <string name="sync_title">Work periodicly</string>
-    <string name="attachment_title">Double speed</string>
-    <string name="attachment_summary_on">Double working frequency </string>
-    <string name="attachment_summary_off">Standard operating frequency</string>
+    <string name="attachment_title">Two times slower</string>
+    <string name="attachment_summary_on">Two times slower working frequency </string>
+    <string name="attachment_summary_off">Two times slower operating frequency</string>
+
+    <string name="attachment2_title">5 times slower</string>
+    <string name="attachment2_summary_on"> 5 times slower working frequency </string>
+    <string name="attachment2_summary_off">5 times slower operating frequency</string>
+
+    <string name="attachment3_title">10 times slower</string>
+    <string name="attachment3_summary_on">x10 times slower working frequency </string>
+    <string name="attachment3_summary_off">10 times operating frequency</string>
 </resources>

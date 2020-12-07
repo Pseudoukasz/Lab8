@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private Button button_restart;
     private TextView textInfoService, textInfoSettings;
     private String message;
-    private Boolean show_time, work, work_double;
+    private Boolean show_time, work, work_every_two, work_every_five, work_every_ten;
 
     private void init() {
         button_start = (Button) findViewById(R.id.buttonStart);
@@ -41,12 +41,16 @@ public class MainActivity extends AppCompatActivity {
         message = sharedPreferences.getString("message","ForSer");
         show_time = sharedPreferences.getBoolean("show_time", true);
         work = sharedPreferences.getBoolean("sync",true);
-        work_double = sharedPreferences.getBoolean("double", false);
+        work_every_two = sharedPreferences.getBoolean("double", false);
+        work_every_five = sharedPreferences.getBoolean("quintuple", false);
+        work_every_ten = sharedPreferences.getBoolean("decuple", false);
 
         return "Message: " + message + "\n"
                 +"show_time: " + show_time.toString() +"\n"
                 +"work: " + work.toString() + "\n"
-                +"double: " + work_double.toString();
+                +"every 2 sec: " + work_every_two.toString() + "\n"
+                +"every 5 sec: " + work_every_five.toString() + "\n"
+                +"every 10 sec: " + work_every_ten.toString();
     }
 
     private void updateUI(){
@@ -129,7 +133,9 @@ public class MainActivity extends AppCompatActivity {
         startIntent.putExtra(MyForegroundService.MESSAGE,message);
         startIntent.putExtra(MyForegroundService.TIME,show_time);
         startIntent.putExtra(MyForegroundService.WORK,work);
-        startIntent.putExtra(MyForegroundService.WORK_DOUBLE,work_double);
+        startIntent.putExtra(MyForegroundService.WORK_DOUBLE,work_every_two);
+        startIntent.putExtra(MyForegroundService.WORK_QUINTUPLE,work_every_five);
+        startIntent.putExtra(MyForegroundService.WORK_DECUPLE,work_every_ten);
 
 
         ContextCompat.startForegroundService(this, startIntent);
